@@ -1,4 +1,4 @@
-export const filterNestedObjects = (obj, searchString) => {
+export const inObject = (obj, searchString) => {
       for (const prop in obj) {
         if (typeof obj[prop] === "object") {
           const result = filterNestedObjects(obj[prop], searchString);
@@ -11,8 +11,3 @@ export const filterNestedObjects = (obj, searchString) => {
       }
       return false;
     };
-
-    return this.medicalRecord.filter((obj) => {
-      return filterNestedObjects(obj, searchString);
-    });
-  };
