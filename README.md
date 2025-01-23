@@ -9,5 +9,6 @@ Clone it, Pull some issues and all that, either way open-source is FREE
 2. strSec(string) - find seconds in following string '1h 1m 1s'
 3. nodeConnect(obj, obj) - returns the value for 'd' attribute to create connections between ports of node editor
 4. inObject(obj, searchString) - check wether a string is in object (nested objects) or not
-5. _coming soon_
+5. func2Str(function) - convert a function to the string for string-based data management like saving a function in JSON
+6. _coming soon_
 
