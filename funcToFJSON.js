@@ -1,4 +1,4 @@
-function func2Str(func) {
+function funcToFJSON(func) {
 	// Validate input
 	if (typeof func !== "function") {
 		throw new TypeError("Input must be a function");
@@ -18,7 +18,7 @@ function func2Str(func) {
 		// Split and trim arguments, handling default values and destructuring
 		functionArgs = argsMatch[1]
 			.split(",")
-			.map(arg => arg.trim())
+			.map((arg) => arg.trim())
 			.filter(Boolean);
 	}
 
@@ -44,14 +44,14 @@ function func2Str(func) {
 	}
 
 	// Analyze arguments for advanced cases
-	const parsedArgs = functionArgs.map(arg => {
-		const [name, defaultValue] = arg.split("=").map(part => part.trim());
+	const parsedArgs = functionArgs.map((arg) => {
+		const [name, defaultValue] = arg.split("=").map((part) => part.trim());
 		const isRest = name.startsWith("...");
 		return {
 			name: isRest ? name.slice(3) : name,
 			isRest,
 			defaultValue: defaultValue || null,
-			isDestructured: name.includes("{") || name.includes("[")
+			isDestructured: name.includes("{") || name.includes("["),
 		};
 	});
 
@@ -62,6 +62,15 @@ function func2Str(func) {
 		functionBody,
 		isArrowFunction: funcString.includes("=>"),
 		isAsync: funcString.startsWith("async"),
-		isGenerator: funcString.startsWith("function*")
+		isGenerator: funcString.startsWith("function*"),
 	};
+}
+
+function funcFromFJSON(fjson) {
+	console.warn('⚠️ funcFromFJSON is unstable, use it carefully after modifying it to your specific use case');
+	const argNames = fjson.functionArgs.map((arg) => arg.name);
+	const func = new Function(...argNames, fjson.functionBody);
+
+	// Wrap in async if needed
+	return fjson.isAsync ? async (...args) => func(...args) : func;
 }
