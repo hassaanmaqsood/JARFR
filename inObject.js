@@ -1,7 +1,7 @@
 export const inObject = (obj, searchString) => {
       for (const prop in obj) {
         if (typeof obj[prop] === "object") {
-          const result = filterNestedObjects(obj[prop], searchString);
+          const result = inObject(obj[prop], searchString);
           if (result) {
             return true;
           }
