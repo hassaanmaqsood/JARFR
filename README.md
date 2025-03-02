@@ -10,5 +10,6 @@ Clone it, Pull some issues and all that, either way open-source is FREE
 3. nodeConnect(obj, obj) - returns the value for 'd' attribute to create connections between ports of node editor
 4. inObject(obj, searchString) - check wether a string is in object (nested objects) or not
 5. funcToFJSON(function) - convert a function to the string for string-based data management like saving a function in JSON
-6. _coming soon_
+6. runtimeHandlers(corefunction, middlewares, context, options) - executes a sequence of asynchronous middleware-like handlers around a core function
+7. _coming soon_
 
